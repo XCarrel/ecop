@@ -1,0 +1,16 @@
+
+body {
+  font-family: Arial;
+}
+
+th.rotate {
+  height: 140px;
+  white-space: nowrap;
+}
+
+th.rotate > div {
+  transform:
+          translate(15px, 80px)
+          rotate(270deg);
+  width: 10px;
+}
