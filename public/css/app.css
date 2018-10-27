@@ -13,3 +13,24 @@ th.rotate > div {
   width: 10px;
 }
 
+.nbElements {
+  font-size: x-small;
+  color: gray;
+}
+
+.weight {
+  font-size: large;
+  font-weight: bold;
+}
+
+@media print {
+  form a {
+    display: none;
+  }
+
+  h3 {
+    color: #f00;
+    background: none;
+  }
+}
+

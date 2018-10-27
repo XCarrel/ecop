@@ -14,3 +14,25 @@ th.rotate > div {
           rotate(270deg);
   width: 10px;
 }
+
+.nbElements { // to show the number of observations that participate in a total
+  font-size: x-small;
+  color: gray;
+}
+
+.weight { // to highlight the weight in the list of observations
+  font-size: large;
+  font-weight: bold;
+}
+
+// let's not print the bottom form and button
+@media print {
+  form a {
+    display: none;
+  }
+
+  h3 {
+    color: #f00;
+    background: none;
+  }
+}

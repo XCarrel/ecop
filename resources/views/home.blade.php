@@ -3,9 +3,9 @@
 @section('content')
     <table class="table table-bordered">
         <tr>
-            <th>Compétence</th>
+            <th>Un informaticien qui travaille bien ...</th>
             @foreach ($persons as $person)
-                <th class="rotate">
+                <th class="rotate align-text-bottom">
                     <div><span>{{ $person->name }}</span></div>
                 </th>
             @endforeach
@@ -16,11 +16,20 @@
                     {{ $competence->shortName }}<br>
                 </th>
                 @foreach ($persons as $person)
-                    <td class="text-center clickable-cell" data-pid="{{ $person->id }}" data-cid="{{ $competence->id }}">{{ isset($totals[$person->id][$competence->id]) ? $totals[$person->id][$competence->id] : "" }}</td>
+                    <td class="text-center clickable-cell" data-pid="{{ $person->id }}" data-cid="{{ $competence->id }}">
+                        @if (isset($totals[$person->id][$competence->id]))
+                            {{ $totals[$person->id][$competence->id]['total'] }}
+                            @if ($totals[$person->id][$competence->id]['nb'] > 1)
+                                <span class="nbElements"> ({{ $totals[$person->id][$competence->id]['nb'] }})
+                            @endif
+                        @endif
+                    </td>
                 @endforeach
             </tr>
         @endforeach
     </table>
+
+    <a href="/summary" class="btn btn-link">Résumé des compétences</a>
 
     <!-- Generate modals for description -->
     @foreach($competences as $competence)

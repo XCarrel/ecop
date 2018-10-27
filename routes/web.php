@@ -15,5 +15,9 @@ Route::get('/', 'HomeController@index');
 
 Route::get('/observations/{pid}/{cid}','HomeController@observations');
 
+Route::get('/summary','HomeController@summary');
+
 Route::post('/newobservation','HomeController@newobservation');
+
+Route::post('/newevidence','HomeController@newevidence');
 

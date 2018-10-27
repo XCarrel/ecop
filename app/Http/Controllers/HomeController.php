@@ -23,19 +23,36 @@ class HomeController extends Controller
 
         $observations = \DB::table('observations')
             ->join('evidences', 'evidences.id', '=', 'evidence_id')
-            ->selectRaw('person_id as pid, competence_id as cid, sum(weight) as total')
+            ->selectRaw('person_id as pid, competence_id as cid, sum(weight) as total, count(weight) as nb')
             ->groupBy('pid')
             ->groupBy('cid')
             ->get();
 
         $totals = array();
         foreach ($observations as $ob)
-            $totals[$ob->pid][$ob->cid] = $ob->total;
+            $totals[$ob->pid][$ob->cid] = ['total' => $ob->total, 'nb' => $ob->nb];
 
         return view('home')
             ->with('persons', $persons)
             ->with('competences', $competences)
             ->with('totals', $totals)
+            ->with('posevidences', $posevidences)
+            ->with('negevidences', $negevidences);
+    }
+
+    public function summary()
+    {
+        $competences = App\Competence::orderBy('importance','desc')->get();
+        $posevidences = array();
+        $negevidences = array();
+        foreach (\DB::table('evidences')->get() as $evidence)
+            if ($evidence->basicWeight > 0)
+                $posevidences[$evidence->competence_id][] = $evidence->description;
+            else
+                $negevidences[$evidence->competence_id][] = $evidence->description;
+
+        return view('summary')
+            ->with('competences', $competences)
             ->with('posevidences', $posevidences)
             ->with('negevidences', $negevidences);
     }
@@ -106,5 +123,22 @@ class HomeController extends Controller
             }
         }
         return $this->observations($request->pid, $request->cid);
+    }
+
+    public function newevidence(Request $request)
+    {
+        $bweight = $request->bweight;
+        $cid = $request->cid;
+        $description = $request->description;
+
+        if ($bweight != 0 && strlen($description) > 5 && $cid > 0) // ok to add
+        {
+                $newev = new App\Evidence();
+                $newev->description = $description;
+                $newev->basicWeight = $bweight;
+                $newev->competence_id = $cid;
+                $newev->save();
+        }
+        return $this->summary();
     }
 }

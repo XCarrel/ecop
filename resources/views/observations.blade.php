@@ -10,7 +10,7 @@
         <ul>
             @foreach ($observations as $observation)
                 <li>
-                    Le {{ Carbon\Carbon::parse($observation->timestamp)->format('d M Y à H:i') }}, {{ $observation->weight > 0 ? "+".$observation->weight : $observation->weight }} parce que: {{ $observation->details }}
+                    Le {{ Carbon\Carbon::parse($observation->timestamp)->format('d M Y à H:i') }}, <span class="weight"> {{ $observation->weight > 0 ? "+".$observation->weight : $observation->weight }} </span>parce que: {{ $observation->details }}
                 </li>
             @endforeach
         </ul>
@@ -23,14 +23,6 @@
     <h3>Nouvelle observation</h3>
     <form action="/newobservation" method="post">
         @csrf
-        <div class="row align-top">
-            <label class="col col-1 text-right" for="iddetail">Détails:</label>
-            <textarea id="details" name="details" cols="50" class="col form-control col-6"></textarea>
-        </div>
-        <div class="row">
-            <label class="col col-1 text-right" for="idweight">Poids:</label>
-            <input type="number" id="weight" name="weight" class="col col-1 form-control" value="1">
-        </div>
         <div class="row">
             <label class="col col-1 text-right">Lié à:</label>
             <fieldset class="col col-6">
@@ -42,6 +34,14 @@
                 @endforeach
                 <input type="radio" id="otherev" name="evidence" value="-1" class="mr-2">Autre: <textarea id="newevdesc" name="newevdesc" cols="80" class="col form-control"></textarea><br>
             </fieldset>
+        </div>
+        <div class="row">
+            <label class="col col-1 text-right" for="idweight">Poids:</label>
+            <input type="number" id="weight" name="weight" class="col col-1 form-control" value="1">
+        </div>
+        <div class="row align-top">
+            <label class="col col-1 text-right" for="iddetail">Détails:</label>
+            <textarea id="details" name="details" cols="50" class="col form-control col-6"></textarea>
         </div>
         <div class="row">
             <div class="col col-1">
