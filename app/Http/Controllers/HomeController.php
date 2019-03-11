@@ -11,7 +11,7 @@ class HomeController extends Controller
     //
     public function Index()
     {
-        $persons = App\Person::all();
+        $persons = App\Person::orderBy('name')->get();
         $competences = App\Competence::orderBy('importance','desc')->get();
         $posevidences = array();
         $negevidences = array();
@@ -57,13 +57,14 @@ class HomeController extends Controller
             ->with('negevidences', $negevidences);
     }
 
-    public function observations($pid, $cid)
+    public function observations($pid, $cid) // person id, competence id
     {
         $observations = \DB::table('observations')
             ->join('evidences', 'evidences.id', '=', 'evidence_id')
             ->where('person_id', '=', $pid)
             ->where('competence_id', '=', $cid)
-            ->select('timestamp', 'details', 'weight')
+            ->select('timestamp', 'details', 'weight', 'description')
+            ->orderBy('timestamp','asc')
             ->get();
         $person = \DB::table('persons')
             ->where('persons.id', '=', $pid)

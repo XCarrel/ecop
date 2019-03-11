@@ -5,6 +5,7 @@ body {
 th.rotate {
   height: 140px;
   white-space: nowrap;
+  padding: 0px !important;
 }
 
 th.rotate > div {
@@ -23,14 +24,15 @@ th.rotate > div {
   font-weight: bold;
 }
 
-@media print {
-  form a {
-    display: none;
-  }
+.footnote {
+  font-size: small;
+  color: gray;
+  float: right;
+}
 
-  h3 {
-    color: #f00;
-    background: none;
+@media print {
+  #addform {
+    display: none;
   }
 }
 

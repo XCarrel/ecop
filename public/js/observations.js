@@ -31,18 +31,18 @@ $(document).ready(function () {
         checkFields()
     })
 
-    $('#details').change(function () {
+    $('#details').keydown(function () {
         checkFields()
     })
-    $('#weight').change(function () {
+    $('#weight').keydown(function () {
         checkFields()
     })
-    // because change doesn't fire everytime I click on up/down (!?!?)
+    // because change doesn't fire everytime I click on numeric up/down (!?!?)
     $('#weight').click(function () {
         checkFields()
     })
 
-    $('#newevdesc').change(function () {
+    $('#newevdesc').keydown(function () {
         checkFields()
     })
 })

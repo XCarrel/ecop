@@ -9,8 +9,8 @@
         </h3>
         <ul>
             @foreach ($observations as $observation)
-                <li>
-                    Le {{ Carbon\Carbon::parse($observation->timestamp)->format('d M Y à H:i') }}, <span class="weight"> {{ $observation->weight > 0 ? "+".$observation->weight : $observation->weight }} </span>parce que: {{ $observation->details }}
+                <li class="alert-{{ ($observation->weight >0) ? "success" : "danger"}}">
+                    Le {{ Carbon\Carbon::parse($observation->timestamp)->format('d M Y à H:i') }}, <span class="weight"> {{ $observation->weight > 0 ? "+".$observation->weight : $observation->weight }} </span>parce que: {{ $observation->description }}, <br><span style="font-weight: bolder">Détails:</span> {{ $observation->details }}
                 </li>
             @endforeach
         </ul>

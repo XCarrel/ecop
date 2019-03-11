@@ -34,22 +34,24 @@
             </tr>
         @endforeach
     </table>
+    <p class="footnote">{{ Carbon\Carbon::now() }}</p>
 
-    <h4>Ajoute une observation</h4>
-    <form method="post" action="/newevidence">
-        @csrf()
-        <select name="cid" class="form-control col-3">
-            <option value="0" selected>--- Choisis une compétence ---</option>
-            @foreach ($competences as $competence)
-                <option value="{{ $competence->id }}">{{ $competence->shortName }}</option>
-            @endforeach
-        </select>
-        <label for="bweight">Poids de base</label>
-        <input type="number" id="bweight" name="bweight"><br>
-        <textarea name="description" class="form-control col-6"></textarea><br>
-        <button class="form-control btn btn-info col-1" type="submit">Ok</button>
-    </form>
+    <div id="addform">
+        <h4>Ajoute une observation</h4>
+        <form method="post" action="/newevidence">
+            @csrf()
+            <select name="cid" class="form-control col-3">
+                <option value="0" selected>--- Choisis une compétence ---</option>
+                @foreach ($competences as $competence)
+                    <option value="{{ $competence->id }}">{{ $competence->shortName }}</option>
+                @endforeach
+            </select>
+            <label for="bweight">Poids de base</label>
+            <input type="number" id="bweight" name="bweight"><br>
+            <textarea name="description" class="form-control col-6"></textarea><br>
+            <button class="form-control btn btn-info col-1" type="submit">Ok</button>
+        </form>
 
-    <a href="/" class="btn btn-link">Retour</a>
-
+        <a href="/" class="btn btn-link">Retour</a>
+    </div>
 @endsection

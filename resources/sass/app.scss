@@ -6,6 +6,7 @@ body {
 th.rotate {
   height: 140px;
   white-space: nowrap;
+  padding: 0px !important;
 }
 
 th.rotate > div {
@@ -27,12 +28,8 @@ th.rotate > div {
 
 // let's not print the bottom form and button
 @media print {
-  form a {
+  #addform {
     display: none;
   }
 
-  h3 {
-    color: #f00;
-    background: none;
-  }
 }

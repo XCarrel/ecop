@@ -3,10 +3,23 @@ body {
 
 th.rotate {
   height: 140px;
-  white-space: nowrap; }
+  white-space: nowrap;
+  padding: 0px !important; }
 
 th.rotate > div {
   transform: translate(15px, 80px) rotate(270deg);
   width: 10px; }
+
+.nbElements {
+  font-size: x-small;
+  color: gray; }
+
+.weight {
+  font-size: large;
+  font-weight: bold; }
+
+@media print {
+  #addform {
+    display: none; } }
 
 /*# sourceMappingURL=app.css.map */
